@@ -20,6 +20,7 @@ defmodule SoftieWeb.Router do
     get "/", PageController, :index
 
     resources "/tags", TagController, except: [:show]
+    resources "/articles", ArticleController
 
     live "/articles/:id", ArticleLive
   end

@@ -12,6 +12,7 @@
       <section class="container">
         <nav role="navigation">
           <ul>
+            <li><%= link "Articles", to: Routes.article_path(@conn, :index) %></li>
             <li><%= link "Tags", to: Routes.tag_path(@conn, :index) %></li>
           </ul>
         </nav>
