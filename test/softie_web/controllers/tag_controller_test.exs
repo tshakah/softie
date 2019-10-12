@@ -23,7 +23,7 @@ defmodule SoftieWeb.TagControllerTest do
   end
 
   @tag skip: :setup
-  test "redirects to show when data is valid", %{conn: conn} do
+  test "redirects to index when data is valid", %{conn: conn} do
     conn = post conn, Routes.tag_path(conn, :create), tag: %{@tag_attrs | scope: "NOSCOPE"}
 
     assert redirected_to(conn) == Routes.tag_path(conn, :index)
