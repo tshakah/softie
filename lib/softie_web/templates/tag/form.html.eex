@@ -1,0 +1,21 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <p class="help-block">Oops, something went wrong! Please check the errors below.</p>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :scope, class: "#{state_class(f, :scope)}" %>
+    <%= text_input f, :scope, class: "#{state_class(f, :scope)}" %>
+    <%= error_tag f, :scope %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :name, class: "#{state_class(f, :name)}" %>
+    <%= text_input f, :name, class: "#{state_class(f, :name)}" %>
+    <%= error_tag f, :name %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Submit", class: "button" %>
+  </div>
+<% end %>

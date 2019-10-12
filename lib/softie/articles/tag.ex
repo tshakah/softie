@@ -16,6 +16,7 @@ defmodule Softie.Articles.Tag do
   def changeset(tag, attrs) do
     tag
     |> cast(attrs, [:scope, :name])
-    |> validate_required([:scope, :name])
+    |> validate_required([:name])
+    |> unique_constraint(:name, name: :unique_scoped_name)
   end
 end

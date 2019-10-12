@@ -81,6 +81,18 @@ defmodule Softie.ArticlesTest do
       assert {:error, %Ecto.Changeset{}} = Articles.create_tag(@invalid_attrs)
     end
 
+    test "create_tag/1 with duplicate name returns error changeset" do
+      _tag = tag_fixture()
+
+      assert {:error, %Ecto.Changeset{}} = Articles.create_tag(@tag_attrs)
+    end
+
+    test "create_tag/1 with duplicate name in different scope creates a tag" do
+      _tag = tag_fixture()
+
+      assert {:ok, %Tag{}} = Articles.create_tag(%{@tag_attrs | scope: "NOSCOPE"})
+    end
+
     test "update_tag/2 with valid data updates the tag" do
       tag = tag_fixture()
       assert {:ok, %Tag{} = tag} = Articles.update_tag(tag, @update_attrs)

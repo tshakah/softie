@@ -19,11 +19,8 @@ defmodule SoftieWeb.Router do
 
     get "/", PageController, :index
 
+    resources "/tags", TagController, except: [:show]
+
     live "/articles/:id", ArticleLive
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", SoftieWeb do
-  #   pipe_through :api
-  # end
 end

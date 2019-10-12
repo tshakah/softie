@@ -8,10 +8,17 @@ defmodule SoftieWeb.ErrorHelpers do
   @doc """
   Generates tag for inlined form input errors.
   """
-  def error_tag(form, field) do
-    Enum.map(Keyword.get_values(form.errors, field), fn error ->
-      content_tag(:span, translate_error(error), class: "help-block")
-    end)
+  def error_tag(%{errors: errors}, field) do
+    if Keyword.has_key?(errors, field) do
+      content_tag :span, class: "help-block" do
+        [
+          "#{String.capitalize(Atom.to_string(field))} ",
+          Enum.map(Keyword.get_values(errors, field), fn (error) ->
+            translate_error(error)
+          end)
+        ]
+      end
+    end
   end
 
   @doc """
@@ -39,6 +46,14 @@ defmodule SoftieWeb.ErrorHelpers do
       Gettext.dngettext(SoftieWeb.Gettext, "errors", msg, msg, count, opts)
     else
       Gettext.dgettext(SoftieWeb.Gettext, "errors", msg, opts)
+    end
+  end
+
+  def state_class(form, field) do
+    if form.errors[field] do
+      "is-error"
+    else
+      "is-success"
     end
   end
 end
