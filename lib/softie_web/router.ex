@@ -19,9 +19,10 @@ defmodule SoftieWeb.Router do
 
     get "/", PageController, :index
 
+    live "/articles/:id", ArticleLive.Show
+    live "/articles/:id/edit", ArticleLive.Edit
+
     resources "/tags", TagController, except: [:show]
     resources "/articles", ArticleController
-
-    live "/articles/:id", ArticleLive
   end
 end

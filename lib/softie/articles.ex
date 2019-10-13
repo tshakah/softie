@@ -8,6 +8,12 @@ defmodule Softie.Articles do
 
   alias Softie.Articles.Article
 
+  @topic inspect(__MODULE__)
+
+  def subscribe(article_id) do
+    Phoenix.PubSub.subscribe(Softie.PubSub, @topic <> "#{article_id}")
+  end
+
   @doc """
   Returns the list of articles.
 
@@ -71,6 +77,7 @@ defmodule Softie.Articles do
     article
     |> Article.changeset(attrs)
     |> Repo.update()
+    |> notify_subscribers([:article, :updated])
   end
 
   @doc """
@@ -262,4 +269,13 @@ defmodule Softie.Articles do
   def delete_article_tag(%ArticleTag{} = article_tag) do
     Repo.delete(article_tag)
   end
+
+
+  defp notify_subscribers({:ok, result}, event) do
+    Phoenix.PubSub.broadcast(Softie.PubSub, @topic, {__MODULE__, event, result})
+    Phoenix.PubSub.broadcast(Softie.PubSub, @topic <> "#{result.id}", {__MODULE__, event, result})
+    {:ok, result}
+  end
+
+  defp notify_subscribers({:error, reason}, _event), do: {:error, reason}
 end

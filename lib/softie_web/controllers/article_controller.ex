@@ -26,8 +26,7 @@ defmodule SoftieWeb.ArticleController do
   end
 
   def show(conn, %{"id" => id}) do
-    article = Articles.get_article!(id)
-    render(conn, "show.html", article: article)
+    live_render(conn, SoftieWeb.ArticleLive.Show, session: %{id: id})
   end
 
   def edit(conn, %{"id" => id}) do
