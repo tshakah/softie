@@ -19,11 +19,10 @@ defmodule SoftieWeb.Router do
 
     get "/", PageController, :index
 
-    live "/articles/:id", ArticleLive
-  end
+    live "/articles/:id", ArticleLive.Show
+    live "/articles/:id/edit", ArticleLive.Edit
 
-  # Other scopes may use custom stacks.
-  # scope "/api", SoftieWeb do
-  #   pipe_through :api
-  # end
+    resources "/tags", TagController, except: [:show]
+    resources "/articles", ArticleController
+  end
 end

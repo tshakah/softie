@@ -1,0 +1,15 @@
+<%= form_for @changeset, @action, [phx_change: :update], fn f -> %>
+  <%= if @changeset.action do %>
+    <p class="help-block">Oops, something went wrong! Please check the errors below.</p>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :content, class: "#{state_class(f, :content)}" %>
+    <%= textarea f, :content, class: "#{state_class(f, :content)}", phx_debounce: 250 %>
+    <%= error_tag f, :content %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Submit", class: "button" %>
+  </div>
+<% end %>
