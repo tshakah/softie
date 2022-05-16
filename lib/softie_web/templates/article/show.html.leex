@@ -1,0 +1,4 @@
+<p><%= text_to_html(@article.content) %></p>
+
+<span><%= link "Edit", to: Routes.article_path(SoftieWeb.Endpoint, :edit, @article), class: "button" %></span>
+<span><%= link "Back", to: Routes.article_path(SoftieWeb.Endpoint, :index), class: "button" %></span>

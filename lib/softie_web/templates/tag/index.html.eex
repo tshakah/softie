@@ -1,0 +1,23 @@
+<h1>Tags</h1>
+
+<span><%= link "New tag", to: Routes.tag_path(SoftieWeb.Endpoint, :new), class: "button" %></span>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Tag</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for tag <- @tags do %>
+      <tr>
+        <td><%= display(tag) %></td>
+        <td>
+          <span><%= link "Edit", to: Routes.tag_path(@conn, :edit, tag), class: "button" %></span>
+          <span><%= link "Delete", to: Routes.tag_path(@conn, :delete, tag), method: :delete, data: [confirm: "Are you sure?"], class: "button" %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
