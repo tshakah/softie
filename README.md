@@ -1,3 +1,3 @@
 # Softie
 
-This is a Stack Overflow for Teams clone built to experiment with Phoenix LiveView
+This was a Stack Overflow for Teams clone built to experiment with collaborative editing in Phoenix LiveView
